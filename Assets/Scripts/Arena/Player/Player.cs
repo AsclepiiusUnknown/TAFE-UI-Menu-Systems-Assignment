@@ -16,6 +16,10 @@ public class Player : LivingEntity
     public Transform crossHairsT;
     public GameObject crossHairsGO;
 
+    public int levelIndex;
+    public float playerHealth;
+    private MapGenerator mapGenerator;
+
     private void Awake()
     {
         PlayerPrefs.SetInt("Can Cheer", 1);
@@ -24,6 +28,13 @@ public class Player : LivingEntity
         playerController = GetComponent<PlayerController>();
         viewCamera = Camera.main;
         gunController = GetComponent<GunController>();
+
+        if (GameObject.FindGameObjectWithTag("MapGenerator").GetComponent<MapGenerator>() != null && mapGenerator == null)
+        {
+            mapGenerator = GameObject.FindGameObjectWithTag("MapGenerator").GetComponent<MapGenerator>();
+        }
+        playerHealth = health;
+        levelIndex = mapGenerator.mapIndex;
     }
 
     protected override void Start()
@@ -39,6 +50,11 @@ public class Player : LivingEntity
 
     void Update()
     {
+        if (GameObject.FindGameObjectWithTag("MapGenerator").GetComponent<MapGenerator>() != null && mapGenerator == null)
+        {
+            mapGenerator = GameObject.FindGameObjectWithTag("MapGenerator").GetComponent<MapGenerator>();
+        }
+
         //Movement Input
         Vector3 moveInput = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
         Vector3 moveVelocity = moveInput.normalized * moveSpeed;

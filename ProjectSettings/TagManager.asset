@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Wall
   - Shell
+  - MapGenerator
   layers:
   - Default
   - TransparentFX

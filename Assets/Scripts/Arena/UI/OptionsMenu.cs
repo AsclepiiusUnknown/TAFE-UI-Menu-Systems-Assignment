@@ -10,27 +10,35 @@ public class OptionsMenu : MonoBehaviour
     public GameObject pauseUiHolder;
     public GameObject optionsUiHolder;
 
+    [HideInInspector]
+    public bool isFullscreen;
+
     public Slider[] volumeSliders;
     public Toggle[] resToggles;
     public int[] screenWidths;
-    int activeScreenResIndex;
+    [HideInInspector]
+    public int activeScreenResIndex;
+    [HideInInspector]
+    public int sharedQualityIndex = 3;
 
     public bool canCheer = true;
 
 
     private void Start()
     {
-        activeScreenResIndex = PlayerPrefs.GetInt("Screen Res Index");
-        bool isFullscreen = (PlayerPrefs.GetInt("Full Screen") == 1)?true:false;
+        //activeScreenResIndex = PlayerPrefs.GetInt("Screen Res Index");
+        //isFullscreen = (PlayerPrefs.GetInt("Full Screen") == 1)?true:false;
 
         volumeSliders[0].value = AudioManager.instance.masterVolPercent;
         volumeSliders[1].value = AudioManager.instance.musicVolPercent;
         volumeSliders[2].value = AudioManager.instance.sfxVolPercent;
 
+        ///
         for (int i = 0; i < resToggles.Length; i++)
         {
             resToggles[i].isOn = i == activeScreenResIndex;
         }
+        ///
 
         SetFullscreen(isFullscreen);
     }
@@ -46,8 +54,8 @@ public class OptionsMenu : MonoBehaviour
             activeScreenResIndex = i;
             float aspectRatio = 16 / 9f;
             Screen.SetResolution(screenWidths[i], (int)(screenWidths[i] / aspectRatio), false);
-            PlayerPrefs.SetInt("Screen Res Index", activeScreenResIndex);
-            PlayerPrefs.Save();
+            //PlayerPrefs.SetInt("Screen Res Index", activeScreenResIndex);
+            //PlayerPrefs.Save();
         }
     }
     public void SetFullscreen(bool isFullscreen)
@@ -68,8 +76,8 @@ public class OptionsMenu : MonoBehaviour
             SetScreenRes(activeScreenResIndex);
         }
 
-        PlayerPrefs.SetInt("Full Screen", ((isFullscreen) ? 1 : 0));
-        PlayerPrefs.Save();
+        //PlayerPrefs.SetInt("Full Screen", ((isFullscreen) ? 1 : 0));
+        //PlayerPrefs.Save();
     }
     public void SetMasterVolume(float value)
     {
@@ -89,13 +97,19 @@ public class OptionsMenu : MonoBehaviour
         {
             _isCheering = false;
             canCheer = false;
-            PlayerPrefs.SetInt("Can Cheer", ((canCheer) ? 1 : 0));
+            //PlayerPrefs.SetInt("Can Cheer", ((canCheer) ? 1 : 0));
         }
         else
         {
             _isCheering = true;
             canCheer = true;
         }
+    }
+
+    public void SetQuality(int qualityIndex)
+    {
+        sharedQualityIndex = qualityIndex;
+        QualitySettings.SetQualityLevel(qualityIndex);
     }
 
     public void BackToPause()
@@ -105,8 +119,31 @@ public class OptionsMenu : MonoBehaviour
         optionsUiHolder.SetActive(false);
     }
 
-    public void SetQuality(int qualityIndex)
+    public void SaveOptions()
     {
-        QualitySettings.SetQualityLevel(qualityIndex);
+        SaveSystem.SaveOptions(this);
+    }
+
+    public void LoadOptions()
+    {
+        if(SaveSystem.LoadOptions() != null)
+        {
+            return;
+        }
+
+        OptionsData data = SaveSystem.LoadOptions();
+
+        SetFullscreen(data.isFullscreen);
+        isFullscreen = data.isFullscreen;
+
+        SetScreenRes(data.activeScreenResIndex);
+        activeScreenResIndex = data.activeScreenResIndex;
+
+        SetQuality(data.qualityIndex);
+        sharedQualityIndex = data.qualityIndex;
+
+        SetMasterVolume(data.masterVolPercent);
+        SetMusicVolume(data.musicVolPercent);
+        SetSfxVolume(data.sfxVolPercent);
     }
 }

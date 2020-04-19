@@ -1160,7 +1160,7 @@ GameObject:
   - component: {fileID: 65203940}
   m_Layer: 9
   m_Name: Map
-  m_TagString: Untagged
+  m_TagString: MapGenerator
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -8836,7 +8836,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 774253103}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 83d20227f85194041976d8baac07a3e3, type: 3}
+  m_Script: {fileID: 11500000, guid: 630181c51edcc994682737e513744847, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &778010860
@@ -26143,7 +26143,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Exit Game
+  m_text: Quit to desktop
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: fe0f11fabfa516246a193e466a4c70bf, type: 2}
   m_sharedMaterial: {fileID: -425637939957804281, guid: fe0f11fabfa516246a193e466a4c70bf,
@@ -26213,10 +26213,10 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 1195613148689820019}
-    characterCount: 9
+    characterCount: 15
     spriteCount: 0
-    spaceCount: 1
-    wordCount: 2
+    spaceCount: 2
+    wordCount: 3
     linkCount: 0
     lineCount: 1
     pageCount: 1
@@ -26249,7 +26249,7 @@ GameObject:
   - component: {fileID: 798106931100688178}
   - component: {fileID: 1889060196759826752}
   m_Layer: 5
-  m_Name: Back Btn
+  m_Name: Save&Exit Btn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -26415,6 +26415,17 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 774253106}
+        m_MethodName: SavePlayer
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 616673513}
         m_MethodName: GoToMenu
         m_Mode: 1
@@ -27020,7 +27031,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Back to menu
+  m_text: Save and Quit
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: fe0f11fabfa516246a193e466a4c70bf, type: 2}
   m_sharedMaterial: {fileID: -425637939957804281, guid: fe0f11fabfa516246a193e466a4c70bf,
@@ -27090,7 +27101,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 3483823647792679530}
-    characterCount: 12
+    characterCount: 13
     spriteCount: 0
     spaceCount: 2
     wordCount: 3
@@ -27365,8 +27376,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -1.9998951, y: -342.69998}
-  m_SizeDelta: {x: 1331.3, y: 334.4}
+  m_AnchoredPosition: {x: -0.000013566, y: -333}
+  m_SizeDelta: {x: 1898.1, y: 334.4}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4419334178202733827
 CanvasRenderer:

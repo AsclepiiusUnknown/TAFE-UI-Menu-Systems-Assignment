@@ -127,10 +127,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startingHealth: 10
+  health: 0
   moveSpeed: 5
   crossHairs: {fileID: 0}
   crossHairsT: {fileID: 0}
   crossHairsGO: {fileID: 0}
+  levelIndex: 0
+  playerHealth: 0
 --- !u!114 &3760078225806856435
 MonoBehaviour:
   m_ObjectHideFlags: 0
