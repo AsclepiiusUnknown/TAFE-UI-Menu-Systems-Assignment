@@ -10,6 +10,10 @@ public class OptionsMenu : MonoBehaviour
     public GameObject pauseUiHolder;
     public GameObject optionsUiHolder;
 
+    public Slider masterVolSlider;
+    public Slider musicVolSlider;
+    public Slider sfxVolSlider;
+
     [HideInInspector]
     public bool isFullscreen;
 
@@ -119,31 +123,10 @@ public class OptionsMenu : MonoBehaviour
         optionsUiHolder.SetActive(false);
     }
 
-    public void SaveOptions()
+    public void UpdateUI()
     {
-        SaveSystem.SaveOptions(this);
-    }
-
-    public void LoadOptions()
-    {
-        if(SaveSystem.LoadOptions() != null)
-        {
-            return;
-        }
-
-        OptionsData data = SaveSystem.LoadOptions();
-
-        SetFullscreen(data.isFullscreen);
-        isFullscreen = data.isFullscreen;
-
-        SetScreenRes(data.activeScreenResIndex);
-        activeScreenResIndex = data.activeScreenResIndex;
-
-        SetQuality(data.qualityIndex);
-        sharedQualityIndex = data.qualityIndex;
-
-        SetMasterVolume(data.masterVolPercent);
-        SetMusicVolume(data.musicVolPercent);
-        SetSfxVolume(data.sfxVolPercent);
+        masterVolSlider.value = AudioManager.instance.masterVolPercent;
+        musicVolSlider.value = AudioManager.instance.musicVolPercent;
+        sfxVolSlider.value = AudioManager.instance.sfxVolPercent;
     }
 }

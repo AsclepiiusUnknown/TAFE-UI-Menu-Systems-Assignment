@@ -3765,8 +3765,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 766580905}
-        m_MethodName: LoadOptions
+      - m_Target: {fileID: 766580903}
+        m_MethodName: Load
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -8232,8 +8232,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 766580905}
-        m_MethodName: SaveOptions
+      - m_Target: {fileID: 766580903}
+        m_MethodName: Save
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -8742,6 +8742,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 630181c51edcc994682737e513744847, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  saveAndLoad: {fileID: 766580903}
 --- !u!114 &422803479
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16489,9 +16490,10 @@ GameObject:
   - component: {fileID: 766580902}
   - component: {fileID: 766580905}
   - component: {fileID: 766580904}
+  - component: {fileID: 766580903}
   m_Layer: 5
   m_Name: Menu Manager
-  m_TagString: Untagged
+  m_TagString: MenuManager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -16529,6 +16531,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainMenuHolder: {fileID: 805441134}
   optionsUiHolder: {fileID: 1448928377}
+--- !u!114 &766580903
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 766580900}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab07d1ade537e7f41a1f49140cc831d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &766580904
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -46329,8 +46343,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 422803478}
-        m_MethodName: LoadPlayer
+      - m_Target: {fileID: 766580903}
+        m_MethodName: Load
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

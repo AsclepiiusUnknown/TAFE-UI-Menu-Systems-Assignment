@@ -7,7 +7,15 @@ public class GameManager : MonoBehaviour
     private Player player;
     private LivingEntity playerEntity;
     private MapGenerator mapGenerator;
+    public SaveAndLoad saveAndLoad;
 
+    private void Awake()
+    {
+        if(saveAndLoad != null)
+        {
+            //saveAndLoad.Load();
+        }
+    }
 
     /*private void Awake()
     {
