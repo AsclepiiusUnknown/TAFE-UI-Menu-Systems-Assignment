@@ -60,7 +60,5 @@ public class SaveAndLoad : MonoBehaviour
         optionsMenu.SetMasterVolume(data.masterVolPercent);
         optionsMenu.SetMusicVolume(data.musicVolPercent);
         optionsMenu.SetSfxVolume(data.sfxVolPercent);
-
-        optionsMenu.UpdateUI();
     }
 }

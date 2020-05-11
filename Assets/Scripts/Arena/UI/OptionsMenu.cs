@@ -10,10 +10,6 @@ public class OptionsMenu : MonoBehaviour
     public GameObject pauseUiHolder;
     public GameObject optionsUiHolder;
 
-    public Slider masterVolSlider;
-    public Slider musicVolSlider;
-    public Slider sfxVolSlider;
-
     [HideInInspector]
     public bool isFullscreen;
 
@@ -121,12 +117,5 @@ public class OptionsMenu : MonoBehaviour
         Time.timeScale = 0;
         pauseUiHolder.SetActive(true);
         optionsUiHolder.SetActive(false);
-    }
-
-    public void UpdateUI()
-    {
-        masterVolSlider.value = AudioManager.instance.masterVolPercent;
-        musicVolSlider.value = AudioManager.instance.musicVolPercent;
-        sfxVolSlider.value = AudioManager.instance.sfxVolPercent;
     }
 }
