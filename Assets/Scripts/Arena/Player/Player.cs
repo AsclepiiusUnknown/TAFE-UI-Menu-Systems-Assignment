@@ -28,13 +28,15 @@ public class Player : LivingEntity
         playerController = GetComponent<PlayerController>();
         viewCamera = Camera.main;
         gunController = GetComponent<GunController>();
-        
+
         if (GameObject.FindGameObjectWithTag("MapGenerator").GetComponent<MapGenerator>() != null && mapGenerator == null)
         {
             mapGenerator = GameObject.FindGameObjectWithTag("MapGenerator").GetComponent<MapGenerator>();
         }
         playerHealth = health;
         levelIndex = mapGenerator.mapIndex;
+
+
     }
 
     protected override void Start()
@@ -55,8 +57,28 @@ public class Player : LivingEntity
             mapGenerator = GameObject.FindGameObjectWithTag("MapGenerator").GetComponent<MapGenerator>();
         }
 
+        float horizontal = 0;
+        float vertical = 0;
+
+        if (Input.GetKey(KeyBindManager.keys["Up"]))
+        {
+            vertical++;
+        }
+        if (Input.GetKey(KeyBindManager.keys["Down"]))
+        {
+            vertical--;
+        }
+        if (Input.GetKey(KeyBindManager.keys["Left"]))
+        {
+            horizontal--;
+        }
+        if (Input.GetKey(KeyBindManager.keys["Right"]))
+        {
+            horizontal++;
+        }
+
         //Movement Input
-        Vector3 moveInput = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
+        Vector3 moveInput = new Vector3(horizontal, 0, vertical);
         Vector3 moveVelocity = moveInput.normalized * moveSpeed;
         playerController.Move(moveVelocity);
 
@@ -80,23 +102,23 @@ public class Player : LivingEntity
         }
 
         //Weapon Input
-        if (Input.GetMouseButton(0))
+        if (Input.GetKey(KeyBindManager.keys["Shoot"]))
         {
             gunController.OnTriggerHold();
         }
 
-        if (Input.GetMouseButtonUp(0))
+        if (Input.GetKeyUp(KeyBindManager.keys["Shoot"]))
         {
             gunController.OnTriggerRelease();
         }
 
-        if (Input.GetKeyDown(KeyCode.R))
+        if (Input.GetKeyDown(KeyBindManager.keys["Reload"]))
         {
             gunController.Reload();
         }
 
         //Out of bounds death
-        if(transform.position.y < -10)
+        if (transform.position.y < -10)
         {
             TakeDamage(health);
         }

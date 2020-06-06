@@ -6,72 +6,91 @@ using UnityEngine.UI;
 
 public class PauseMenu : MonoBehaviour
 {
+    #region Variables
+    //Refernces to GameObjects to switch on/off depending on what we need visible
+    [Header("UI GameObjects")]
     public GameObject gameUiHolder;
     public GameObject pauseUiHolder;
     public GameObject optionsUiHolder;
 
+    [Header("Pause Functionality")]
     public bool isPaused;
+    #endregion
 
+
+    //Called once every frame
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.P))
+        //Checking constantly if the escape key has been pressed
+        if (Input.GetKeyDown(KeyBindManager.keys["Pause"]))
         {
-            TogglePause();
+            TogglePause(); //if so then call the TogglePause function
         }
     }
 
-    public void Quit()
-    {
-#if UNITY_EDITOR
-        UnityEditor.EditorApplication.isPlaying = false;
-#endif
-
-        Application.Quit();
-    }
-    public void GoToOptionsMenu()
-    {
-        pauseUiHolder.SetActive(false);
-        optionsUiHolder.SetActive(true);
-        gameUiHolder.SetActive(false);
-    }
-
-    public void GoToMenu()
-    {
-        Cursor.visible = true;
-        SceneManager.LoadScene("Menu");
-    }
-
+    #region Pause Functionality
+    //used to toggle pause on/off
     public void TogglePause()
     {
-        if (isPaused)
+        if (isPaused) //if the game is currently paused
         {
-            isPaused = false;
-            Time.timeScale = 1;
-            gameUiHolder.SetActive(true);
-            pauseUiHolder.SetActive(false);
+            isPaused = false; //unpause
+            Time.timeScale = 1; //set time to normal
+            gameUiHolder.SetActive(true); //enable game UI
+            pauseUiHolder.SetActive(false); //disable pause UI
         }
-        else
+        else //otherwise if the game isnt paused
         {
-            isPaused = true;
-            Time.timeScale = 0;
-            gameUiHolder.SetActive(false);
-            pauseUiHolder.SetActive(true);
+            isPaused = true; //pause it
+            Time.timeScale = 0; //stop time
+            gameUiHolder.SetActive(false); //Disable the game UI
+            pauseUiHolder.SetActive(true); //Enable the pause UI
         }
     }
 
+    //Used to resume the game from the pause menu (same as if we were toggling pause off)
     public void ResumeGame()
     {
-        isPaused = false;
-        Time.timeScale = 1;
-        gameUiHolder.SetActive(true);
-        pauseUiHolder.SetActive(false);
+        isPaused = false; //unpause
+        Time.timeScale = 1; //set time to normal
+        gameUiHolder.SetActive(true); //enable the game UI
+        pauseUiHolder.SetActive(false); //disable the pause UI
     }
 
+    //used to return to the pause menu (usually from options. this gets rid of time bugs that occured during another approach)
     public void BackToPause()
     {
-        Time.timeScale = 0;
-        gameUiHolder.SetActive(false);
-        pauseUiHolder.SetActive(true);
-        optionsUiHolder.SetActive(false);
+        Time.timeScale = 0; //Stop time
+        gameUiHolder.SetActive(false); //disable the game UI
+        pauseUiHolder.SetActive(true); //enable the pause UI
+        optionsUiHolder.SetActive(false); //disable the options UI
     }
+    #endregion
+
+    #region Other Menu Functionality
+    //used to quit the application
+    public void Quit()
+    {
+#if UNITY_EDITOR //If it is being run in unity editor
+        UnityEditor.EditorApplication.isPlaying = false; //Stop editor simulation
+#endif
+
+        Application.Quit(); //Stop the application if there is one
+    }
+
+    //Used to acess the options menu
+    public void GoToOptionsMenu()
+    {
+        pauseUiHolder.SetActive(false); //Disable pause UI
+        optionsUiHolder.SetActive(true); //enable options UI
+        gameUiHolder.SetActive(false); //disable game UI
+    }
+
+    //Used to load the main menu scene
+    public void GoToMenu()
+    {
+        Cursor.visible = true; //Make the cursor visible to the player again
+        SceneManager.LoadScene("Menu");//Load the menu scene
+    }
+    #endregion
 }

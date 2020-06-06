@@ -28,7 +28,7 @@ public class SaveAndLoad : MonoBehaviour
         optionsMenu.SetFullscreen(true);
         optionsMenu.isFullscreen = true;
 
-        optionsMenu.SetScreenRes(0);
+        //optionsMenu.SetScreenRes(0);
         optionsMenu.activeScreenResIndex = 0;
 
         optionsMenu.SetQuality(3);
@@ -51,7 +51,7 @@ public class SaveAndLoad : MonoBehaviour
         optionsMenu.isFullscreen = data.isFullscreen;
         optionsMenu.SetFullscreen(data.isFullscreen);
 
-        optionsMenu.SetScreenRes(data.activeScreenResIndex);
+        //optionsMenu.SetScreenRes(data.activeScreenResIndex);
         optionsMenu.activeScreenResIndex = data.activeScreenResIndex;
 
         optionsMenu.SetQuality(data.qualityIndex);
