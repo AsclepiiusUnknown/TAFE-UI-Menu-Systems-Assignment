@@ -25,6 +25,9 @@ public class KeyBindManager : MonoBehaviour
     [Header("Visual Debugging")]
     public Color32 changedKey = new Color32(39, 171, 249, 255); //Color we change the button to once we have changed the associated key
     public Color32 selectedKey = new Color32(239, 116, 36, 255); //Color we change the button to when its selected
+
+    [Header("Debugging")]
+    public static bool hasLoaded = false;
     #endregion
 
     // Start is called before the first frame update
@@ -33,12 +36,17 @@ public class KeyBindManager : MonoBehaviour
         //Loop adds the keys to the dictionary (created above) with either save or default (depending on load)
         for (int i = 0; i < baseSetup.Length; i++) //For all the keys in the base setup array
         {
-            //Add keys according to the sved string or default
+            if (hasLoaded)
+                return;
+
+            //Add keys according to the saved string or default
             keys.Add(baseSetup[i].keyName, (KeyCode)System.Enum.Parse(typeof(KeyCode), PlayerPrefs.GetString(baseSetup[i].keyName, baseSetup[i].defaultKey)));
 
             //Change the display to what the Bind is for each UI Text component
             baseSetup[i].keyDisplayText.text = keys[baseSetup[i].keyName].ToString();
         }
+
+        hasLoaded = true;
     }
 
     #region Changing the Keybinds

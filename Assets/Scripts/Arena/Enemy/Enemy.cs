@@ -55,7 +55,7 @@ public class Enemy : LivingEntity
     protected override void Start()
     {
         base.Start();
-        
+
         if (hasTarget)
         {
             currentState = State.Chasing;
@@ -139,7 +139,7 @@ public class Enemy : LivingEntity
 
         bool hasAppliedDamage = false;
 
-        while(percent <= 1)
+        while (percent <= 1)
         {
             if (percent >= .5f && !hasAppliedDamage)
             {
@@ -172,7 +172,7 @@ public class Enemy : LivingEntity
                 {
                     Vector3 dirToTarget = (target.position - transform.position).normalized;
                     Vector3 targetPos = target.position - dirToTarget * (myCollisionRadius + targetCollisionRadius + attackDistanceThreshhold / 2);
-                    if (!dead)
+                    if (!dead && pathFinder != null && targetPos != null)
                     {
                         pathFinder.SetDestination(targetPos);
                     }

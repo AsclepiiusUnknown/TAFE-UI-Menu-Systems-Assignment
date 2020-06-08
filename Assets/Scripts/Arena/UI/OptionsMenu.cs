@@ -66,6 +66,11 @@ public class OptionsMenu : MonoBehaviour
     }
     #endregion
 
+    public void ClearAllPlayerPrefs()
+    {
+        PlayerPrefs.DeleteAll();
+    }
+
     #region Options Functionality
     //Used to set the screen reolution to a passed index
     public void SetScreenRes(int i)
